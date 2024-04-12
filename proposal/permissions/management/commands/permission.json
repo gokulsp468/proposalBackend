@@ -1,0 +1,990 @@
+[
+    {
+        "module": "DASHBOARD",
+        "module_label": "Dashboard",
+        "permissions": [
+            {
+                "id": "Dashboard/ProposalCount",
+                "permission": "PROPOSAL_COUNT",
+                "permission_label": "No.of Proposals"
+            },
+            {
+                "id": "Dashboard/ConversionCount",
+                "permission": "CONVERSION_COUNT",
+                "permission_label": "No.of Conversions"
+            },
+            {
+                "id": "Dashboard/UserCount",
+                "permission": "USER_COUNT",
+                "permission_label": "No.of Users"
+            },
+            {
+                "id": "Dashboard/DocumentCount",
+                "permission": "DOCUMENT_COUNT",
+                "permission_label": "No.of Documents"
+            },
+            {
+                "id": "Dashboard/ProposalGraph",
+                "permission": "PROPOSAL_GRAPH",
+                "permission_label": "View Proposal Graph"
+            },
+            {
+                "id": "Dashboard/ConversionGraph",
+                "permission": "CONVERSION_GRAPH",
+                "permission_label": "View Conversion Graph"
+            }
+        ]
+    },
+    {
+        "module": "PROPOSAL",
+        "module_label": "Proposal",
+        "submodules": [
+            {
+                "module": "PROPOSALS",
+                "module_label": "Proposals",
+                "permissions": [
+                    {
+                        "id": "Proposal/Add",
+                        "permission": "ADD_PROPOSAL",
+                        "permission_label": "Add Proposal",
+                        "requires": ["Proposal/List|Proposal/ListAll"],
+                        "liteRequires": ["Client/List", "Template/List", "Employee/List", "Technology/List"]
+                    },
+                    {
+                        "id": "Proposal/List",
+                        "permission": "LIST_PROPOSALS",
+                        "permission_label": "List My Proposals",
+                        "optionalWith":["Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/ListAll",
+                        "permission": "LIST_ALL_PROPOSALS",
+                        "permission_label": "List All Proposals",
+                        "optionalWith":["Proposal/List"]
+                    },
+                    {
+                        "id": "Proposal/View",
+                        "permission": "VIEW_PROPOSAL",
+                        "permission_label": "View Proposal",
+                        "requires": ["Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Edit",
+                        "permission": "EDIT_PROPOSAL",
+                        "permission_label": "Edit Proposal",
+                        "requires": ["Proposal/View"],
+                        "liteRequires": ["Client/List", "Template/List", "Employee/List", "Technology/List"]
+                    },
+                    {
+                        "id": "Proposal/Activate",
+                        "permission": "ACTIVATE_PROPOSAL",
+                        "permission_label": "Activate Proposal",
+                        "requires": ["Proposal/List|Proposal/ListAll", "Proposal/Deactivate"]
+                    },
+                    {
+                        "id": "Proposal/Deactivate",
+                        "permission": "DEACTIVATE_PROPOSAL",
+                        "permission_label": "Deactivate Proposal",
+                        "requires": ["Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/ActivityLog",
+                        "permission": "ACTIVITY_LOG",
+                        "permission_label": "Activity Log",
+                        "requires": ["Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Duplicate",
+                        "permission": "DUPLICATE_PROPOSAL",
+                        "permission_label": "Duplicate Proposal",
+                        "requires": ["Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/ActivityLog/Export",
+                        "permission": "EXPORT_ACTIVITY_LOG",
+                        "permission_label": "Export Activity Log",
+                        "requires": ["Proposal/ActivityLog"]
+                    },
+                    {
+                        "id": "Proposal/MoveToConversion",
+                        "permission": "MOVE_TO_CONVERSION",
+                        "permission_label": "Move To Conversion",
+                        "requires": ["Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Download",
+                        "permission": "DOWNLOAD_PROPOSAL",
+                        "permission_label": "Download Proposal",
+                        "requires": ["Proposal/View"]
+                    },
+                    {
+                        "id": "Proposal/CopyLink",
+                        "permission": "COPY_LINK_PROPOSAL",
+                        "permission_label": "Copy Link Proposal",
+                        "requires": ["Proposal/Download"]
+                    },
+                    {
+                        "id": "Proposal/Share",
+                        "permission": "SHARE_PROPOSAL",
+                        "permission_label": "Share Proposal",
+                        "requires": ["Proposal/View"],
+                        "liteRequires": ["Document/List"]
+                    },
+                    {
+                        "id": "Proposal/Share/AttachPDF",
+                        "permission": "ATTACH_PDF",
+                        "permission_label": "Attach PDF",
+                        "requires": ["Proposal/Share"]
+                    },
+                    {
+                        "id": "Proposal/Share/AttachExcel",
+                        "permission": "ATTACH_EXCEL",
+                        "permission_label": "Attach Excel",
+                        "requires": ["Proposal/Share"]
+                    },
+                    {
+                        "id": "Proposal/Export",
+                        "permission": "EXPORT_PROPOSAL",
+                        "permission_label": "Export Proposal",
+                        "requires": ["Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Integration",
+                        "permission": "INTEGRATE_PROPOSAL",
+                        "permission_label": "Integrate Proposal",
+                        "requires": ["Proposal/List|Proposal/ListAll"]
+                    }
+                ]
+            },
+            {
+                "module": "PROPOSAL_BREAKDOWN",
+                "module_label": "Proposal Breakdown",
+                "appVisibility": false,
+                "webVisibility": false,
+                "permissions": [
+                    {
+                        "id": "Proposal/FeatureBreakdown/View",
+                        "permission": "PROPOSAL_FEATURE_BREAKDOWN_VIEW",
+                        "permission_label": "View Feature Breakdown",
+                        "requires": ["Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/FeatureBreakdown/Count",
+                        "permission": "VIEW_ESTIMATION_TOTALS",
+                        "permission_label": "View Estimation Total",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Feature/UpdateStatus",
+                        "permission": "UPDATE_STATUS_PROPOSAL_FEATURE",
+                        "permission_label": "Feature Approve/Reject",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Feature/Estimation/Edit",
+                        "permission": "EDIT_ESTIMATION_PROPOSAL_FEATURE",
+                        "permission_label": "Edit All Estimation",
+                        "requires": ["Proposal/Feature/Edit","Proposal/SubFeature/Edit","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Module/Add",
+                        "permission": "ADD_PROPOSAL_MODULE",
+                        "permission_label": "Add Module",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Module/Edit",
+                        "permission": "EDIT_PROPOSAL_MODULE",
+                        "permission_label": "Edit Module",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Module/Delete",
+                        "permission": "DELETE_PROPOSAL_MODULE",
+                        "permission_label": "Delete Module",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Feature/Add",
+                        "permission": "ADD_FEATURE",
+                        "permission_label": "Add Feature",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Feature/AddAbove",
+                        "permission": "ADD_PROPOSAL_FEATURE_ABOVE",
+                        "permission_label": "Add Feature Above",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Feature/AddBelow",
+                        "permission": "ADD_PROPOSAL_FEATURE_BELOW",
+                        "permission_label": "Add Feature Below",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Feature/Edit",
+                        "permission": "EDIT_PROPOSAL_FEATURE",
+                        "permission_label": "Edit Feature",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Feature/Delete",
+                        "permission": "DELETE_PROPOSAL_FEATURE",
+                        "permission_label": "Delete Feature",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Feature/Move",
+                        "permission": "MOVE_PROPOSAL_FEATURE",
+                        "permission_label": "Move Feature",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/SubFeature/Add",
+                        "permission": "ADD_PROPOSAL_SUB_FEATURE",
+                        "permission_label": "Add Sub Feature",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/SubFeature/AddAbove",
+                        "permission": "ADD_PROPOSAL_SUB_FEATURE_ABOVE",
+                        "permission_label": "Add Sub Feature Above",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/SubFeature/AddBelow",
+                        "permission": "ADD_PROPOSAL_SUB_FEATURE_BELOW",
+                        "permission_label": "Add Sub Feature Below",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/SubFeature/Edit",
+                        "permission": "EDIT_PROPOSAL_SUB_FEATURE",
+                        "permission_label": "Edit Sub Feature",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/SubFeature/Delete",
+                        "permission": "DELETE_PROPOSAL_SUB_FEATURE",
+                        "permission_label": "Delete Sub Feature",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/SubFeature/Move",
+                        "permission": "MOVE_PROPOSAL_SUB_FEATURE",
+                        "permission_label": "Move Sub Feature",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    },
+                    {
+                        "id": "Proposal/Module/Move",
+                        "permission": "MOVE_PROPOSAL_MODULE",
+                        "permission_label": "Move Module",
+                        "requires": ["Proposal/FeatureBreakdown/View","Proposal/List|Proposal/ListAll"]
+                    }
+                ]
+            },
+            {
+                "module": "CONVERSIONS",
+                "module_label": "Conversions",
+                "permissions": [
+                    {
+                        "id": "Conversion/List",
+                        "permission": "LIST_CONVERSIONS",
+                        "permission_label": "List Conversions"
+                    },
+                    {
+                        "id": "Conversion/View",
+                        "permission": "VIEW_CONVERSION",
+                        "permission_label": "View Conversion",
+                        "requires": ["Conversion/List"]
+                    },
+                    {
+                        "id": "Conversion/GenerateServiceAgreement",
+                        "permission": "GENERATE_SERVICE_AGREEMENT",
+                        "permission_label": "Generate Service Agreement",
+                        "requires": ["Conversion/List"]
+                    },
+                    {
+                        "id": "Conversion/ChangeStatus",
+                        "permission": "CHANGE_STATUS_CONVERSION",
+                        "permission_label": "Conversion Change Status",
+                        "requires": ["Conversion/List"]
+                    },
+                    {
+                        "id": "Conversion/Export",
+                        "permission": "EXPORT_CONVERSION",
+                        "permission_label": "Export Conversion",
+                        "requires": ["Conversion/List"]
+                    },
+                    {
+                        "id": "Conversion/Proposal/View",
+                        "permission": "VIEW_CONVERSION_PROPOSAL",
+                        "permission_label": "View Proposal",
+                        "requires": ["Conversion/List"]
+                    },
+                    {
+                        "id": "Conversion/Proposal/Download",
+                        "permission": "DOWNLOAD_CONVERSION_PROPOSAL",
+                        "permission_label": "Download Proposal",
+                        "requires": ["Conversion/Proposal/View"]
+                    }
+                ]
+            },
+            {
+                "module": "CLIENT",
+                "module_label": "Clients",
+                "permissions": [
+                    {
+                        "id": "Client/Add",
+                        "permission": "ADD_CLIENT",
+                        "permission_label": "Add Client",
+                        "requires": ["Client/List"]
+                    },
+                    {
+                        "id": "Client/List",
+                        "permission": "LIST_CLIENT",
+                        "permission_label": "List Clients"
+                    },
+                    {
+                        "id": "Client/View",
+                        "permission": "VIEW_CLIENT",
+                        "permission_label": "View Client",
+                        "requires": ["Client/List"]
+                    },
+                    {
+                        "id": "Client/Edit",
+                        "permission": "EDIT_CLIENT",
+                        "permission_label": "Edit Client",
+                        "requires": ["Client/View"]
+                    },
+                    {
+                        "id": "Client/Delete",
+                        "permission": "DELETE_CLIENT",
+                        "permission_label": "Delete Client",
+                        "requires": ["Client/List"]
+                    },
+                    {
+                        "id": "Client/Export",
+                        "permission": "EXPORT_CLIENT",
+                        "permission_label": "Export Client",
+                        "requires": ["Client/List"]
+                    }
+                ]
+            },
+            {
+                "module": "TEMPLATES",
+                "module_label": "Templates",
+                "permissions": [
+                    {
+                        "id": "ProposalTemplate/Add",
+                        "permission": "ADD_TEMPLATE",
+                        "permission_label": "Add Template",
+                        "requires": ["ProposalTemplate/List"],
+                        "liteRequires": ["Client/List"]
+                    },
+                    {
+                        "id": "ProposalTemplate/Edit",
+                        "permission": "EDIT_TEMPLATE",
+                        "permission_label": "Edit Template",
+                        "requires": ["ProposalTemplate/View"],
+                        "liteRequires": ["Client/List"]
+                    },
+                    {
+                        "id": "ProposalTemplate/View",
+                        "permission": "VIEW_TEMPLATE",
+                        "permission_label": "View Template",
+                        "requires": ["ProposalTemplate/List"]
+                    },
+                    {
+                        "id": "ProposalTemplate/List",
+                        "permission": "LIST_TEMPLATES",
+                        "permission_label": "List Templates"
+                    },
+                    {
+                        "id": "ProposalTemplate/Delete",
+                        "permission": "DELETE_TEMPLATE",
+                        "permission_label": "Delete Template",
+                        "requires": ["ProposalTemplate/List"]
+                    },
+                    {
+                        "id": "ProposalTemplate/SetDefault",
+                        "permission": "SET_DEFAULT_TEMPLATE",
+                        "permission_label": "Set Default Template",
+                        "requires": ["ProposalTemplate/List"]
+                    }
+                ]
+            },
+            {
+                "module": "SUGGESTIONS",
+                "module_label": "Suggestions",
+                "appVisibility": false,
+                "permissions": [
+                    {
+                        "id": "Proposal/Suggestion/Add",
+                        "permission": "ADD_SUGGESTION",
+                        "permission_label": "Add Suggestion",
+                        "requires": ["Suggestion/List"],
+                        "liteRequires": ["Technology/Category/List"]
+                    },
+                    {
+                        "id": "Proposal/Suggestion/List",
+                        "permission": "LIST_SUGGESTIONS",
+                        "permission_label": "List Suggestions"
+                    },
+                    {
+                        "id": "Proposal/Suggestion/Edit",
+                        "permission": "EDIT_SUGGESTION",
+                        "permission_label": "Edit Suggestion",
+                        "requires": ["Suggestion/List"],
+                        "liteRequires": ["Technology/Category/List"]
+                    },
+                    {
+                        "id": "Proposal/Suggestion/Delete",
+                        "permission": "DELETE_SUGGESTION",
+                        "permission_label": "Delete Suggestion",
+                        "requires": ["Suggestion/List"]
+                    }
+                ]
+            }       
+          
+        ]
+    },
+  
+    {
+        "module": "PORTFOLIO",
+        "module_label": "Portfolio",
+        "submodules": [
+            {
+                "module": "PORTFOLIOS",
+                "module_label": "Portfolios",
+                "permissions": [
+                    {
+                        "id": "Portfolio/Add",
+                        "permission": "ADD_PORTFOLIOS",
+                        "permission_label": "Add Portfolios",
+                        "requires": ["Portfolio/List"],
+                        "liteRequires": ["Portfolio/Domain/List", "Portfolio/Project/List", "Template/List", "Client/List"]
+                    },
+                    {
+                        "id": "Portfolio/Edit",
+                        "permission": "EDIT_PORTFOLIOS",
+                        "permission_label": "Edit Portfolios",
+                        "requires": ["Portfolio/View"],
+                        "liteRequires": ["Portfolio/Domain/List", "Portfolio/Project/List", "Template/List", "Client/List"]
+                    },
+                    {
+                        "id": "Portfolio/List",
+                        "permission": "LIST_PORTFOLIOS",
+                        "permission_label": "List Portfolios"
+                    },
+                    {
+                        "id": "Portfolio/View",
+                        "permission": "VIEW_PORTFOLIOS",
+                        "permission_label": "View Portfolios",
+                        "requires": ["Portfolio/List"],
+                        "liteRequires": ["Document/List"]
+                    },
+                    {
+                        "id": "Portfolio/ReorderProjects",
+                        "permission": "REORDER_PROJECTS_PORTFOLIOS",
+                        "permission_label": "Drag And Reorder Projects",
+                        "requires": ["Portfolio/View"]
+                    },
+                    {
+                        "id": "Portfolio/SetActiveStatus",
+                        "permission": "SET_ACTIVE_STATUS_PORTFOLIOS",
+                        "permission_label": "Set Active Status",
+                        "requires": ["Portfolio/List"]
+                    },
+                    {
+                        "id": "Portfolio/Delete",
+                        "permission": "DELETE_PORTFOLIOS",
+                        "permission_label": "Delete Portfolios",
+                        "requires": ["Portfolio/List"]
+                    },
+                    {
+                        "id": "Portfolio/CopyLink",
+                        "permission": "COPY_LINK_PORTFOLIOS",
+                        "permission_label": "Copy Link Portfolios",
+                        "requires": ["Portfolio/List"]
+                    },
+                    {
+                        "id": "Portfolio/UpdatePerProjectImageCount",
+                        "permission": "UPDATE_PER_PROJECT_IMAGE_COUNT_PORTFOLIOS",
+                        "permission_label": "Image Count",
+                        "requires": ["Portfolio/List"]
+                    },
+                    {
+                        "id": "Portfolio/SendMail",
+                        "permission": "SEND_MAIL_PORTFOLIOS",
+                        "permission_label": "Generate Portfolio",
+                        "requires": ["Portfolio/View"]
+                    },
+                    {
+                        "id": "Portfolio/Download",
+                        "permission": "DOWNLOAD_PORTFOLIOS",
+                        "permission_label": "Download Portfolios",
+                        "requires": ["Portfolio/View"]
+                    },
+                    {
+                        "id": "Portfolio/ViewLog/List",
+                        "permission": "LIST_VIEW_LOG_PORTFOLIOS",
+                        "permission_label": "Portfolio View Log",
+                        "requires": ["Portfolio/View"]
+                    }
+                ]
+            },
+            {
+                "module": "PROJECTS",
+                "module_label": "Projects",
+                "permissions": [
+                    {
+                        "id": "Portfolio/Project/Add",
+                        "permission": "ADD_PROJECT",
+                        "permission_label": "Add Project",
+                        "requires": ["Portfolio/Project/List"],
+                        "liteRequires": ["Portfolio/Domain/List", "Technology/List"]
+                    },
+                    {
+                        "id": "Portfolio/Project/Edit",
+                        "permission": "EDIT_PROJECT",
+                        "permission_label": "Edit Project",
+                        "requires": ["Portfolio/Project/View"],
+                        "liteRequires": ["Portfolio/Domain/List", "Technology/List"]
+                    },
+                    {
+                        "id": "Portfolio/Project/List",
+                        "permission": "LIST_PROJECTS",
+                        "permission_label": "List Projects"
+                    },
+                    {
+                        "id": "Portfolio/Project/View",
+                        "permission": "VIEW_PROJECT",
+                        "permission_label": "View Project",
+                        "requires": ["Portfolio/Project/List"]
+                    },
+                    {
+                        "id": "Portfolio/Project/Delete",
+                        "permission": "DELETE_PROJECT",
+                        "permission_label": "Delete Project",
+                        "requires": ["Portfolio/Project/List"]
+                    },
+                    {
+                        "id": "Portfolio/Project/Download",
+                        "permission": "DOWNLOAD_PROJECT",
+                        "permission_label": "Download Project",
+                        "requires": ["Portfolio/Project/View"]
+                    },
+                    {
+                        "id": "Portfolio/Project/DownloadImage",
+                        "permission": "DOWNLOAD_IMAGE_PROJECT",
+                        "permission_label": "Download Image",
+                        "requires": ["Portfolio/Project/View"]
+                    }
+                ]
+            },
+            {
+                "module": "PROSPECTS",
+                "module_label": "Prospects",
+                "permissions": [
+                    {
+                        "id": "Portfolio/Prospect/Add",
+                        "permission": "ADD_PROSPECT",
+                        "permission_label": "Add Prospect",
+                        "requires": ["Portfolio/Prospect/List"]
+                    },
+                    {
+                        "id": "Portfolio/Prospect/List",
+                        "permission": "LIST_PROSPECT",
+                        "permission_label": "List Prospects"
+                    },
+                    {
+                        "id": "Portfolio/Prospect/View",
+                        "permission": "VIEW_PROSPECT",
+                        "permission_label": "View Prospect",
+                        "requires": ["Portfolio/Prospect/List"]
+                    },
+                    {
+                        "id": "Portfolio/Prospect/Edit",
+                        "permission": "EDIT_PROSPECT",
+                        "permission_label": "Edit Prospect",
+                        "requires": ["Portfolio/Prospect/View"]
+                    },
+                    {
+                        "id": "Portfolio/Prospect/Delete",
+                        "permission": "DELETE_PROSPECT",
+                        "permission_label": "Delete Prospect",
+                        "requires": ["Portfolio/Prospect/List"]
+                    },
+                    {
+                        "id": "Portfolio/Prospect/Export",
+                        "permission": "EXPORT_PROSPECT",
+                        "permission_label": "Export Prospect",
+                        "requires": ["Portfolio/Prospect/List"]
+                    }
+                ]
+            },
+            {
+                "module": "MESSAGES",
+                "module_label": "Messages",
+                "permissions": [
+                    {
+                        "id": "Portfolio/Message/List",
+                        "permission": "LIST_MESSAGE",
+                        "permission_label": "List Message"
+                    },
+                    {
+                        "id": "Portfolio/Message/Delete",
+                        "permission": "DELETE_MESSAGE",
+                        "permission_label": "Delete Message",
+                        "requires": ["Portfolio/Message/List"]
+                    },
+                    {
+                        "id": "Portfolio/Message/View",
+                        "permission": "VIEW_MESSAGE",
+                        "permission_label": "View Message",
+                        "requires": ["Portfolio/Message/List"]
+                    }
+                ]
+            },
+            {
+                "module": "DOMAINS",
+                "module_label": "Domains",
+                "permissions": [
+                    {
+                        "id": "Portfolio/Domain/Add",
+                        "permission": "ADD_DOMAIN",
+                        "permission_label": "Add Domain",
+                        "requires": ["Portfolio/Domain/List"]
+                    },
+                    {
+                        "id": "Portfolio/Domain/Edit",
+                        "permission": "EDIT_DOMAIN",
+                        "permission_label": "Edit Domain",
+                        "requires": ["Portfolio/Domain/List"]
+                    },
+                    {
+                        "id": "Portfolio/Domain/List",
+                        "permission": "LIST_DOMAINS",
+                        "permission_label": "List Domains"
+                    },
+                    {
+                        "id": "Portfolio/Domain/Delete",
+                        "permission": "DELETE_DOMAIN",
+                        "permission_label": "Delete Domain",
+                        "requires": ["Portfolio/Domain/List"]
+                    }
+                ]
+            },              
+            {
+                "module": "TEMPLATE",
+                "module_label": "Template",
+                "permissions": [
+                    {
+                        "id": "Portfolio/Template/Add",
+                        "permission": "ADD_PORTFOLIO_TEMPLATE",
+                        "permission_label": "Add Template",
+                        "requires": ["Portfolio/Template/List"],
+                        "liteRequires": ["Portfolio/Prospect/List"]
+                    },
+                    {
+                        "id": "Portfolio/Template/Edit",
+                        "permission": "EDIT_PORTFOLIO_TEMPLATE",
+                        "permission_label": "Edit Template",
+                        "requires": ["Portfolio/Template/View"],
+                        "liteRequires": ["Portfolio/Prospect/List"]
+                    },
+                    {
+                        "id": "Portfolio/Template/View",
+                        "permission": "VIEW_PORTFOLIO_TEMPLATE",
+                        "permission_label": "View Template",
+                        "requires": ["Portfolio/Template/List"]
+                    },
+                    {
+                        "id": "Portfolio/Template/List",
+                        "permission": "LIST_PORTFOLIO_TEMPLATES",
+                        "permission_label": "List Templates"
+                    },
+                    {
+                        "id": "Portfolio/Template/Delete",
+                        "permission": "DELETE_PORTFOLIO_TEMPLATE",
+                        "permission_label": "Delete Template",
+                        "requires": ["Portfolio/Template/List"]
+                    },
+                    {
+                        "id": "Portfolio/Template/SetDefault",
+                        "permission": "SET_DEFAULT_PORTFOLIO_TEMPLATE",
+                        "permission_label": "Set Default Template",
+                        "requires": ["Portfolio/Template/List"]
+                    }
+                ]
+            },
+
+            {
+                "module": "SETTINGS",
+                "module_label": "Settings",
+                "permissions": [
+                    {
+                        "id": "Settings/SMTP",
+                        "permission": "SMTP_SETTINGS",
+                        "permission_label": "SMTP Settings",
+                        "sub_permissions": [
+                            {
+                                "id": "Settings/SMTP/View",
+                                "permission": "VIEW_SMTP",
+                                "permission_label": "View SMTP"
+                            },
+                            {
+                                "id": "Settings/SMTP/Add",
+                                "permission": "ADD_SMTP",
+                                "permission_label": "Add/Edit SMTP",
+                                "requires": ["Settings/SMTP/View"]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "Settings/WhitelistIP",
+                        "permission": "WHITELIST_IP",
+                        "permission_label": "Whitelist IP",
+                        "sub_permissions": [
+                            {
+                                "id": "Settings/WhitelistIP/Add",
+                                "permission": "ADD_WHITELIST_IP",
+                                "permission_label": "Add Whitelist IP",
+                                "requires": ["Settings/WhitelistIP/List"]
+                            },
+                            {
+                                "id": "Settings/WhitelistIP/Edit",
+                                "permission": "EDIT_WHITELIST_IP",
+                                "permission_label": "Edit Whitelist IP",
+                                "requires": ["Settings/WhitelistIP/List"]
+                            },
+                            {
+                                "id": "Settings/WhitelistIP/Delete",
+                                "permission": "DELETE_WHITELIST_IP",
+                                "permission_label": "Delete Whitelist IP",
+                                "requires": ["Settings/WhitelistIP/List"]
+                            },
+                            {
+                                "id": "Settings/WhitelistIP/List",
+                                "permission": "LIST_WHITELIST_IP",
+                                "permission_label": "List Whitelist IP"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "Settings/Portfolio",
+                        "permission": "PORTFOLIO_SETTINGS",
+                        "permission_label": "Image Settings",
+                        "sub_permissions": [
+                            {
+                                "id": "Settings/Portfolio/Edit",
+                                "permission": "EDIT_PORTFOLIO_SETTINGS",
+                                "permission_label": "Edit Image Settings"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },  
+    {
+        "module": "USERS",
+        "module_label": "Users",
+        "submodules": [
+            {
+                "module": "EMPLOYEES",
+                "module_label": "Employees",
+                "permissions": [
+                    {
+                        "id": "Employee/Add",
+                        "permission": "ADD_USER",
+                        "permission_label": "Add User",
+                        "requires": ["Employee/List"],
+                        "liteRequires": ["Designation/List", "Technology/List"]
+                    },
+                    {
+                        "id": "Employee/List",
+                        "permission": "LIST_USERS",
+                        "permission_label": "List Users",
+                        "liteRequires": ["Designation/List"]
+                    },
+                    {
+                        "id": "Employee/View",
+                        "permission": "VIEW_USER",
+                        "permission_label": "View User",
+                        "requires": ["Employee/List"]
+                    },
+                    {
+                        "id": "Employee/Edit",
+                        "permission": "EDIT_USER",
+                        "permission_label": "Edit User",
+                        "requires": ["Employee/View"],
+                        "liteRequires": ["Designation/List", "Technology/List"]
+                    },
+                    {
+                        "id": "Employee/ChangePassword",
+                        "permission": "CHANGE_PASSWORD",
+                        "permission_label": "Change Password",
+                        "requires": ["Employee/List"]
+                    },
+                    {
+                        "id": "Employee/Delete",
+                        "permission": "DELETE_USER",
+                        "permission_label": "Delete User",
+                        "requires": ["Employee/List"]
+                    },
+                    {
+                        "id": "Employee/Activate",
+                        "permission": "ACTIVATE_USER",
+                        "permission_label": "Activate User",
+                        "requires": ["Employee/List", "Employee/Deactivate"]
+                    },
+                    {
+                        "id": "Employee/Deactivate",
+                        "permission": "DEACTIVATE_USER",
+                        "permission_label": "Deactivate User",
+                        "requires": ["Employee/List"]
+                    },
+                    {
+                        "id": "Employee/Export",
+                        "permission": "EXPORT_USER",
+                        "permission_label": "Export User",
+                        "requires": ["Employee/List"]
+                    },
+                    {
+                        "id": "Employee/LoginHistory",
+                        "permission": "USER_LOGIN_HISTORY",
+                        "permission_label": "Login History",
+                        "requires": ["Employee/List"]
+                    }
+                ]
+            },
+            {
+                "module": "PERMISSION",
+                "module_label": "Permission",
+                "permissions": [
+                    {
+                        "id": "Designation/Add",
+                        "permission": "ADD_DESIGNATION",
+                        "permission_label": "Add Designation",
+                        "requires": ["Designation/List"]
+                    },
+                    {
+                        "id": "Designation/List",
+                        "permission": "LIST_DESIGNATIONS",
+                        "permission_label": "List Designations"
+                    },
+                    {
+                        "id": "Designation/Edit",
+                        "permission": "EDIT_DESIGNATION",
+                        "permission_label": "Edit Designation",
+                        "requires": ["Designation/List"]
+                    },
+                    {
+                        "id": "Designation/Delete",
+                        "permission": "DELETE_DESIGNATION",
+                        "permission_label": "Delete Designation",
+                        "requires": ["Designation/List"]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "module": "TECHNOLOGIES",
+        "module_label": "Technologies",
+        "submodules": [
+            {
+                "module": "CATEGORY",
+                "module_label": "Category",
+                "permissions": [
+                    {
+                        "id": "Technology/Category/Add",
+                        "permission": "ADD_CATEGORY",
+                        "permission_label": "Add Category",
+                        "requires": ["Technology/Category/List"]
+                    },
+                    {
+                        "id": "Technology/Category/Edit",
+                        "permission": "EDIT_CATEGORY",
+                        "permission_label": "Edit Category",
+                        "requires": ["Technology/Category/List"]
+                    },
+                    {
+                        "id": "Technology/Category/List",
+                        "permission": "LIST_CATEGORIES",
+                        "permission_label": "List Categories"
+                    },
+                    {
+                        "id": "Technology/Category/Delete",
+                        "permission": "DELETE_CATEGORY",
+                        "permission_label": "Delete Category",
+                        "requires": ["Technology/Category/List"]
+                    }
+                ]
+            },
+            {
+                "module": "TECHNOLOGY",
+                "module_label": "Technology",
+                "permissions": [
+                    {
+                        "id": "Technology/Add",
+                        "permission": "ADD_TECHNOLOGY",
+                        "permission_label": "Add Technology",
+                        "requires": ["Technology/List"],
+                        "liteRequires": ["Technology/Category/List"]
+
+                    },
+                    {
+                        "id": "Technology/Edit",
+                        "permission": "EDIT_TECHNOLOGY",
+                        "permission_label": "Edit Technology",
+                        "requires": ["Technology/List"]
+                    },
+                    {
+                        "id": "Technology/List",
+                        "permission": "LIST_TECHNOLOGIES",
+                        "permission_label": "List Technologies"
+                    },
+                    {
+                        "id": "Technology/Delete",
+                        "permission": "DELETE_TECHNOLOGY",
+                        "permission_label": "Delete Technology",
+                        "requires": ["Technology/List"]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "module": "DOCUMENTS",
+        "module_label": "Documents",
+        "permissions": [
+            {
+                "id": "Document/Add",
+                "permission": "ADD_DOCUMENT",
+                "permission_label": "Add Document",
+                "requires": ["Document/List"]
+            },
+            {
+                "id": "Document/List",
+                "permission": "LIST_DOCUMENTS",
+                "permission_label": "List Documents"
+            },
+            {
+                "id": "Document/Download",
+                "permission": "DOWNLOAD_DOCUMENT",
+                "permission_label": "Download Document",
+                "requires": ["Document/List"]
+            },
+            {
+                "id": "Document/Delete",
+                "permission": "DELETE_DOCUMENT",
+                "permission_label": "Delete Document",
+                "requires": ["Document/List"]
+            }
+        ]
+    }
+]
